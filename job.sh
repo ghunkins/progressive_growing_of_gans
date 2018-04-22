@@ -7,5 +7,5 @@
 #SBATCH -e error_pgGAN_%j.txt
 #SBATCH --gres=gpu:2
 
-source activate pgGAN4
+source activate pgGANS4
 python import_example.py
