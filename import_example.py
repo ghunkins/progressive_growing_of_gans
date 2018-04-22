@@ -24,9 +24,13 @@ labels = np.zeros([latents.shape[0]] + Gs.input_shapes[1][1:])
 # Run the generator to produce a set of images.
 images = Gs.run(latents, labels)
 
+print images.shape
+
 # Convert images to PIL-compatible format.
 images = np.clip(np.rint((images + 1.0) / 2.0 * 255.0), 0.0, 255.0).astype(np.uint8) # [-1,1] => [0,255]
-#images = images.transpose(0, 2, 3, 1) # NCHW => NHWC
+images = images.transpose(0, 2, 3, 1) # NCHW => NHWC
+
+print images.shape
 
 # Save images as PNG.
 for idx in range(images.shape[0]):
