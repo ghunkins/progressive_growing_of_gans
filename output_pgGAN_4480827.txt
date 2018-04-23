@@ -1,0 +1,5 @@
+Latents #1 Size: (1000, 512)
+Latents #2 Size: (10, 512)
+Labels Size: (10, 0)
+Images #1 Size: (10, 3, 1024, 1024)
+Images #2 Size: (10, 1024, 1024, 3)
