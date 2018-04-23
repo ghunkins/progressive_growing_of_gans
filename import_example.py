@@ -3,6 +3,7 @@ import numpy as np
 import tensorflow as tf
 import PIL.Image
 import sys
+import interpolate
 
 # add path
 sys.path.append('.')
@@ -17,7 +18,14 @@ with open('karras2018iclr-celebahq-1024x1024.pkl', 'rb') as file:
 # Generate latent vectors.
 latents = np.random.RandomState(1000).randn(1000, *Gs.input_shapes[0][1:]) # 1000 random latents
 print('Latents #1 Size:', latents.shape)
-latents = latents[[477, 56, 83, 887, 583, 391, 86, 340, 341, 415]] # hand-picked top-10
+#latents = latents[[477, 56, 83, 887, 583, 391, 86, 340, 341, 415]] # hand-picked top-10
+chosen_latents = latents[[477, 56]]
+latents = []
+for idx, ratio in enumerate(np.linspace(0, 1, 10)):
+	z = np.stack([interpolate.slerp(ratio, r1, r2) for r1, r2 in zip(chosen_latents[0], chosen_latents[1])])
+	latents.append(z)
+
+latents = np.array(latents)
 print('Latents #2 Size:', latents.shape)
 
 # Generate dummy labels (not used by the official networks).
