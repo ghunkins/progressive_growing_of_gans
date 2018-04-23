@@ -24,8 +24,9 @@ latents = []
 for idx, ratio in enumerate(np.linspace(0, 1, 10)):
 	z1 = np.stack([interpolate.slerp(ratio, r1, r2) for r1, r2 in zip(chosen_latents[0], chosen_latents[1])])
 	z2 = np.stack([interpolate.slerp(ratio, r1, r2) for r1, r2 in zip(chosen_latents[0], chosen_latents[2])])
-	z3 = np.stack([interpolate.slerp(ratio, r1, r2) for r1, r2 in zip(chosen_latents[1], chosen_latents[2])])
-	latents.extend([z1, z2, z3])
+	#z3 = np.stack([interpolate.slerp(ratio, r1, r2) for r1, r2 in zip(chosen_latents[1], chosen_latents[2])])
+	latents.append(z1)
+	latents.append(z2)
 
 latents = np.array(latents)
 print('Latents #2 Size:', latents.shape)
